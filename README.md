@@ -57,3 +57,32 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default MyApp;
 ```
 
+### Configurando Font
+
+Para configurar a fonte do projeto, como nós já sabemos, importamos os links do google fonts e criamos o arquivo **_document.tsx** onde dentro dele colocamos todas as estruturas padrões de um documento para a web mas com componentes do next.
+
+Dentro da estrutura Head, colocamos os links para as fontes escolhidas para a aplicação.
+
+```typescript
+// _document.tsx
+
+import Document, { Html, Head, Main, NextScript } from "next/document";
+
+export default class MyDocument extends Document {
+  render() {
+    return (
+      <Html>
+        <Head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
+}
+```
