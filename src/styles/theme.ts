@@ -15,6 +15,13 @@ export const theme = extendTheme({
       "50": "#EEEEF2"
     }
   },
+  
+  // Posso mudar fonts do body, dos headings e dos monospaces
+  fonts: {
+    heading: 'Roboto',
+    body: 'Roboto',
+  },
+
   styles: {
     global: {
       body: {

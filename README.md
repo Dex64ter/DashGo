@@ -26,7 +26,34 @@ Vamos a organização das pastas do projeto. Dentro de _/src_ colocaremos as pas
 
 Dentro de pages, teremos os arquivos **_app.tsx** o arquivo principal do projeto, com a importação do AppProps do "next/app". E também teremos o arquivo **index.tsx** sendo a página "Home" da nossa aplicação.
 
-## Configurando Chackra UI
+### Configurando Chackra UI
 
 O Chackra UI é uma biblioteca de componentes modular e acessível que fornece os blocos de construção necessários para criar suas aplicações React.
+
+Vamos adicionar o Chackra UI com o seguinte comando:
+
+```yarn add @chakra-ui/react @chakra-ui/icons @emotion/react@^11 @emotion/styled@^11 framer-motion@^4```
+
+Após isso temos toda a configuração das estilizações desejadas que a própria biblioteca nos deixa a disposição para utilizarmos.
+
+Para isso, criamos a nossa pasta _/styles_ com os arquivos **config.ts** e o **theme.ts**. No theme.ts temos a nossa configuração própria dos estilos utilizando a biblioteca ```@chackra-ui/react``` com a ferramenta extendTheme que nos permite configurar, conforme a documentação da biblioteca, as estilizações específicas da aplicação.
+
+E para podermos acessar essa nova configuração, dentro do arquivo **_app.tsx** importamos o ChackraProvider, que é basicamente um componente de contexto que passará a estilização para toda a aplicação, colocando-o em volta das estruturas do retorno.
+
+```typescript
+import { AppProps } from 'next/app';
+import { ChakraProvider } from '@chakra-ui/react'; 
+import { theme } from '@/styles/theme';
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    // resetCSS já vem true por padrão
+    <ChakraProvider theme={ theme }>
+      <Component {...pageProps} />
+    </ChakraProvider>
+  )
+}
+
+export default MyApp;
+```
 
