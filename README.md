@@ -93,7 +93,7 @@ export default class MyDocument extends Document {
   import { Flex, Input, Button, Stack, FormLabel, FormControl } from "@chakra-ui/react";
 import Head from "next/head";
 
-export default function Home() {
+export default function SignIn() {
   return (
     <Flex w="100vw" h="100vh" align="center" justify="center">
       <Head>
@@ -154,3 +154,53 @@ export default function Home() {
   As demais propriedades de cada estrutura do Chakra podem ser vistas e estudadas na documentação do [Chakra](https://chakra-ui.com/docs/components).
 
 ### Component: Input
+
+  Na nossa organização de pastas dos componentes, percebemos uma diferença das outras aplicações feitas. Dessa vez, criamos uma pasta com todos os componentes que estarão presentes em determinada estrutura apenas para direcionamento, mas não criaremos pastas separadas para cada componente criado como era antes
+  
+  Razão disso se deve ao fato de não precisarmos, nessa aplicação, de um arquivo de estilização separado, agora toda ela é injetada diretamente no html.
+
+  ![Organização das pastas em Components](/public/ComponentsOrg.png)
+
+Fizemos o component __Input__ do formulário pois essa estrutura será utilizada em vários outros lugares da aplicação, sabendo disso, ele foi criado com a extensão de todas as proprieades de um "Input" padrão e com a obrigatoriedade dos dados _name_ e _type_ e opcionalmente o nome da "Label".
+
+```typescript
+import { FormControl, FormLabel, Input as ChakraInput, InputProps as ChakraInputProps } from "@chakra-ui/react";
+
+interface InputProps extends ChakraInputProps {
+  name: string;
+  label?: string;
+}
+
+export function Input({ name, label, ...rest }: InputProps) {
+  return (
+    <FormControl>
+      { !! label && <FormLabel htmlFor={name}>{label}</FormLabel> }
+      <ChakraInput          
+        id={name}
+        name={name}
+        focusBorderColor="pink.500"
+        bgColor="gray.900"
+        variant="filled" 
+        _hover={{
+          bgColor: "gray.900"
+        }}
+        size={"lg"}
+        {...rest}
+      />
+    </FormControl>
+  )
+}
+```
+
+  Foi feito apenas uma alteração do nome das estruturas do Chakra por problemas de conflito com o nome do componente, dessa forma não há problemas.
+
+  E sua utilização nas páginas:
+
+```typescript
+  // pages/index.tsx
+  // SignIn()
+  <Stack spacing={4}>
+    <Input name="email" label="E-mail" type="email"/>
+    <Input name="password" label="Senha" type="password"/>
+  </Stack>
+```
