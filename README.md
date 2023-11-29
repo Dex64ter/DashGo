@@ -6,10 +6,6 @@ First, run the development server:
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 # App Dashgo
@@ -86,3 +82,75 @@ export default class MyDocument extends Document {
   }
 }
 ```
+
+### Página: Sign in
+
+  Vamos implementar a primeira página da aplicação. A página de Sign in, o que é basicamente um formulário para que o usuário insira seus dados e consiga acessar a aplicação. A diferença dessa implementação é que todo o processo da página será feito com a ajuda do ChakraUI.
+
+  Dentro do código da página estamos utilizando estruturas do próprio Chakra como o Flex, Input, FormLabel, etc. Cada um deles já possui uma estilização própria por padrão e em cada um deles podemos adicionar estilizações específicas que desejarmos:
+
+  ```typescript
+  import { Flex, Input, Button, Stack, FormLabel, FormControl } from "@chakra-ui/react";
+import Head from "next/head";
+
+export default function Home() {
+  return (
+    <Flex w="100vw" h="100vh" align="center" justify="center">
+      <Head>
+        <title>Home | dashgo</title>
+      </Head>
+
+      <Flex
+        as="form"
+        width="100%"
+        maxWidth={360}
+        bg="gray.800"
+        p="8" // 2rem divide por 4 ou 32px multiplica por 4
+        borderRadius={8}
+        flexDir="column"
+      >
+        <Input
+          id="email"
+          name="input"
+          type="email"
+          focusBorderColor="pink.500"
+          bgColor="gray.900"
+          variant="filled"
+          _hover={{
+            bgColor: "gray.900"
+          }}
+          size={"lg"}
+        />
+
+        <Input          
+          id="password"
+          name="password"
+          type="password"
+          focusBorderColor="pink.500"
+          bgColor="gray.900"
+          variant="filled" 
+          _hover={{
+            bgColor: "gray.900"
+          }}
+          size={"lg"}
+        />
+
+        <Button type="submit" mt="6" colorScheme="pink" size="lg">
+          Entrar
+        </Button>
+      </Flex>
+    </Flex>
+  );
+}
+```
+  A estrutura Flex, especificamente, é como uma div html com a propriedade flex, tanto que no inspecionar da página, essa configuração estará descrito nela. Dentro dessa _tag_ do Chakra conseguimos modificar o tamanho e a posição dos elementos presentes dentro dela além de modificar a estrutura como um bloco do tipo flex.
+
+  O diferencial do \<Flex>\</Flex> é que ele pode se comportar como outras estruturas html utilizando a propriedade **"as"** que no nosso caso acima, usamos para tratá-lo como um _form_ do html.
+
+  No fim temos a nossa primeira tela sem escrever uma linha se quer de arquivo css.
+
+![Imagem de como ficará a página Sign in](/public/pageSignIn.png)
+
+  As demais propriedades de cada estrutura do Chakra podem ser vistas e estudadas na documentação do [Chakra](https://chakra-ui.com/docs/components).
+
+### Component: Input
